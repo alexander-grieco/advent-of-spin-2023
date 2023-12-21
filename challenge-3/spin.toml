@@ -1,0 +1,20 @@
+spin_manifest_version = 2
+
+[application]
+name = "challenge-3"
+version = "0.1.1"
+authors = ["Alex Grieco <awgrieco@gmail.com>"]
+description = "Advent of Spin Challenge 3"
+
+[[trigger.http]]
+route = "/..."
+component = "llm-story"
+
+[component.llm-story]
+source = "llm-story/target/wasm32-wasi/release/llm_story.wasm"
+allowed_outbound_hosts = []
+ai_models = ["llama2-chat"]
+[component.llm-story.build]
+command = "cargo build --target wasm32-wasi --release"
+workdir = "llm-story"
+watch = ["src/**/*.rs", "Cargo.toml"]
